@@ -118,6 +118,10 @@
 
     .value-box { background: #F1F5F9; border-right: 4px solid var(--gold-main); padding: 15px; margin: 15px 0; border-radius: 6px; }
 
+    .counters-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+    .counter-card { background: var(--navy-dark); border: 1px solid var(--gold-main); color: var(--white); padding: 15px; border-radius: 8px; text-align: center; }
+    .counter-number { font-size: 24px; font-weight: 900; color: var(--gold-main); margin-top: 5px; }
+
     .order-form-container { background: #F8FAFC; padding: 20px; border-radius: 8px; border: 1px solid #E2E8F0; }
     .form-group { margin-bottom: 12px; }
     .form-group label { display: block; font-weight: 700; font-size: 13px; color: var(--navy-dark); margin-bottom: 5px; }
@@ -148,20 +152,71 @@
     .record-controls { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
     .btn-record { background: #EF4444; color: white; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; }
 
-    /* حماية القراءة الرقمية من النسخ */
-    .protected-reader {
+    .protected-reader-box {
       user-select: none;
       -webkit-user-select: none;
       background: #FFF;
-      padding: 20px;
+      padding: 15px;
       border: 2px solid var(--navy-dark);
-      border-radius: 8px;
-      max-height: 400px;
-      overflow-y: auto;
+      border-radius: 10px;
+      margin-top: 10px;
+      text-align: center;
     }
 
+    .embed-reader-wrapper {
+      position: relative;
+      width: 100%;
+      height: 75vh;
+      border: 2px solid var(--navy-dark);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #525659;
+    }
+
+    .embed-pdf-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .protection-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.001);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .reader-toolbar-hd {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--navy-dark);
+      color: var(--gold-main);
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-nav-page {
+      background-color: var(--gold-main);
+      color: var(--navy-dark);
+      border: none;
+      padding: 6px 18px;
+      border-radius: 6px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-nav-page:hover { background-color: var(--gold-hover); }
+
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 25, 47, 0.85); z-index: 2000; justify-content: center; align-items: center; padding: 15px; overflow-y: auto; }
-    .modal-content { background: var(--white); width: 100%; max-width: 800px; border-radius: 12px; border: 2px solid var(--gold-main); padding: 25px; max-height: 90vh; overflow-y: auto; position: relative; }
+    .modal-content { background: var(--white); width: 100%; max-width: 950px; border-radius: 12px; border: 2px solid var(--gold-main); padding: 25px; max-height: 95vh; overflow-y: auto; position: relative; }
     .close-modal { position: absolute; top: 12px; left: 12px; font-size: 22px; font-weight: bold; color: var(--navy-dark); cursor: pointer; background: #E2E8F0; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 28px; }
 
     .pricing-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
@@ -279,12 +334,23 @@
           <p style="color: var(--text-muted); margin-bottom: 15px;">دراسة علمية استقرائية مبتكرة في الاستشفاء القرآني المعرفي لتقوية الفهم والذاكرة والذكاء وعلاج حالات النسيان وأمراض الدماغ.</p>
           <div class="value-box">
             <h4>تنبيه خاص بالنسخة الرقمية (PDF):</h4>
-            <p style="font-size: 13px; color: #334155;">النسخة الرقمية مشفرة ومحمية بحقوق الطبع، وتفتح للقراءة فقط عبر الموقع داخل حساب الطالبة بعد الشراء، ولا يجوز إعادة نسخها أو إرسالها أو طباعتها.</p>
+            <p style="font-size: 13px; color: #334155;">النسخة الرقمية مشفرة ومحمية بحقوق الطبع، وتفتح للقراءة فقط عبر الموقع داخل حساب الطالبة بعد الدفع المباشر، ولا يجوز إعادة نسخها أو إرسالها أو طباعتها.</p>
+          </div>
+
+          <div class="counters-grid">
+            <div class="counter-card">
+              <div style="font-size: 12px; color: #CBD5E1;">مشترين النسخة المطبوعة</div>
+              <div class="counter-number" id="printedCountDisplay">148</div>
+            </div>
+            <div class="counter-card">
+              <div style="font-size: 12px; color: #CBD5E1;">مشترين النسخة الرقمية</div>
+              <div class="counter-number" id="digitalCountDisplay">320</div>
+            </div>
           </div>
         </div>
 
         <div class="order-form-container">
-          <h4 style="color: var(--navy-dark); margin-bottom: 15px; font-size: 17px;">اختيار النسخة وبيانات الشحن</h4>
+          <h4 style="color: var(--navy-dark); margin-bottom: 15px; font-size: 17px;">اختيار عدد النسخ وبيانات الشحن وإتمام الدفع</h4>
           <form id="bookOrderForm">
             <div class="form-group">
               <label for="bookTypeSelect">نوع النسخة المطلوبة:</label>
@@ -326,9 +392,9 @@
             </div>
 
             <div class="form-group">
-              <label for="bookPaymentMethod">طريقة الدفع:</label>
+              <label for="bookPaymentMethod">طريقة الدفع الآمن:</label>
               <select id="bookPaymentMethod" onchange="updateBookPriceCalculations()" required>
-                <option value="payoneer">الدفع الدولي المباشر (بايونير / CIB)</option>
+                <option value="payoneer">الدفع الدولي المباشر بالبطاقة (بايونير / CIB)</option>
                 <option value="rajhi">الدفع الداخلي بالسعودية (بنك الراجحي)</option>
               </select>
             </div>
@@ -341,7 +407,10 @@
             </div>
 
             <div class="total-price-banner" id="bookPriceDisplay">المبلغ الإجمالي المطلـوب: $40</div>
-            <button type="submit" class="btn-gold">تأكيد طلب الكتاب والتواصل عبر الواتساب</button>
+            <button type="submit" class="btn-gold" id="bookSubmitBtn">تأكيد طلب الكتاب/الكتب بالنسخة الورقية المطبوعة والتواصل عبر الواتساب</button>
+
+            <!-- زر اقرأ الكتاب مخفي تماماً بشكل افتراضي ولا يظهر إلا بعد الدفع للنسخة الرقمية -->
+            <button type="button" class="btn-gold" id="readBookDirectBtn" style="display:none; margin-top: 12px; background-color: var(--navy-dark); color: var(--gold-main); border: 2px solid var(--gold-main);" onclick="openProtectedReader()">📖 اقرأ الكتاب الآن</button>
           </form>
         </div>
       </div>
@@ -406,13 +475,8 @@
           </tbody>
         </table>
 
-        <!-- مكتبة القراءة للنسخة الرقمية المحمية داخل الحساب -->
-        <h3 style="color: var(--navy-dark); margin: 25px 0 15px; border-bottom: 2px solid var(--gold-main); padding-bottom: 5px;">📖 النسخة الرقمية المتاحة للقراءة فقط</h3>
-        <div class="protected-reader">
-          <h4 style="color: var(--navy-dark); text-align: center; margin-bottom: 10px;">كتاب إحياء العقل السليم بكلام الخلاق العليم</h4>
-          <p style="font-size: 13.5px; color: #334155; line-height: 2;">
-            [هنا يظهر نص ومحتوى كتاب إحياء العقل السليم المحمي داخل حساب الطالبة، مع حظر أزرار الطباعة والتحديد لحفظ حقوق الطبع والنشر].
-          </p>
+        <div style="text-align: center; margin-top: 25px;">
+          <button class="btn-gold" style="max-width: 320px; margin: 0 auto; background-color: var(--navy-dark); color: var(--gold-main); border: 2px solid var(--gold-main);" onclick="openProtectedReader()">📖 فتح واستكمال قراءة الكتاب المشفر</button>
         </div>
 
       </div>
@@ -472,8 +536,8 @@
       
       <form id="reviewForm" onsubmit="handleSaveReview(event)">
         <div class="form-group">
-          <label for="rev_name">اسم الطالب/ة الكريم:</label>
-          <input type="text" id="rev_name" required placeholder="أدخل اسمك الكريم">
+          <label for="rev_name">أدخل اسمك الكريم:</label>
+          <input type="text" id="rev_name" required placeholder="اسمك الكريم">
         </div>
         <div class="form-group">
           <label for="rev_program">البرنامج / الخدمة التي جربتها:</label>
@@ -504,24 +568,35 @@
     </div>
   </div>
 
+  <!-- MODAL FOR PROTECTED EMBEDDED PDF BOOK READER (ULTRA HIGH DEFINITION) -->
+  <div id="protectedReaderModal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeProtectedReader()">&times;</span>
+      <h3 style="color: var(--navy-dark); text-align: center; margin-bottom: 10px;">📖 قارئ الكتاب الرقمي المشفر بالكامل (عالي الوضوح)</h3>
+      
+      <div class="protected-reader-box">
+        <div class="reader-toolbar-hd">
+          <button class="btn-nav-page" onclick="changePdfPage(-1)">← الصفحة السابقة</button>
+          <span style="font-weight: bold;">صفحة <span id="currentPdfPageNum">1</span> من <span id="totalPdfPagesNum">377</span></span>
+          <button class="btn-nav-page" onclick="changePdfPage(1)">الصفحة التالية ➔</button>
+        </div>
+
+        <div class="embed-reader-wrapper">
+          <div class="protection-overlay"></div>
+          <iframe id="protectedPdfIframe" class="embed-pdf-iframe" src=""></iframe>
+        </div>
+      </div>
+      <button class="btn-gold" style="margin-top: 15px;" onclick="closeProtectedReader()">إغلاق القارئ واستكمال القراءة لاحقاً</button>
+    </div>
+  </div>
+
   <div id="companyModal" class="modal-overlay">
     <div class="modal-content" style="max-width: 700px;">
       <span class="close-modal" onclick="closeCompanyModal()">&times;</span>
       <h2 style="color: var(--navy-dark); margin-bottom: 12px; border-bottom: 2px solid var(--gold-main); padding-bottom: 8px;">عن شركة مكين للاستشارات والتدريب والتعليم</h2>
-      
       <p style="font-size: 15px; color: var(--text-dark); margin-bottom: 15px; line-height: 1.9;">
         <strong>شركة مكين للاستشارات والتدريب والتعليم</strong> هي مؤسسة تعليمية واستشارية رائدة، يقع مقرها الرئيسي في <strong>جمهورية مصر العربية</strong>، وتتميز بنطاق خدمات عالمي يصل للطالبات والطلاب في مختلف أنحاء العالم.
       </p>
-
-      <div class="value-box" style="margin: 15px 0;">
-        <h4 style="color: var(--navy-dark); font-size: 16px; margin-bottom: 8px;">ما تمتاز به شركة مكين:</h4>
-        <ul style="list-style-type: square; padding-right: 20px; font-size: 14px; color: #334155;">
-          <li style="margin-bottom: 8px;"><strong>استقطاب الخبرات العالية:</strong> حرص تام على استقطاب أجود المعلمين والمعلمات والمقرئين والمقرئات المتقنين حول العالم ممن يحملون أسانيد عالية وخبرات أكاديمية ودينية مرموقة.</li>
-          <li style="margin-bottom: 8px;"><strong>إدارة مرنة وعصرية:</strong> توفير بيئة تعليمية مرنة تتكيف مع أوقات وجداول الطالبات بمرونة عالية، مع سهولة التواصل والتنسيق الدائم.</li>
-          <li style="margin-bottom: 8px;"><strong>الخدمات المتاحة:</strong> تقديم باقة متكاملة من البرامج القرآنية، الإجازات بالسند المتصل، علوم الحديث، الفقه، اللغة العربية، الرقية الشرعية الموثقة، وخدمات البحوث والرسائل العلمية.</li>
-        </ul>
-      </div>
-
       <button class="btn-gold" onclick="closeCompanyModal()">إغلاق الشاشة</button>
     </div>
   </div>
@@ -647,6 +722,14 @@
   <script>
     const TARGET_WHATSAPP = "201013356935";
 
+    let printedBuyers = parseInt(localStorage.getItem('mkn_printed_buyers')) || 148;
+    let digitalBuyers = parseInt(localStorage.getItem('mkn_digital_buyers')) || 320;
+
+    function renderCounters() {
+      document.getElementById('printedCountDisplay').textContent = printedBuyers;
+      document.getElementById('digitalCountDisplay').textContent = digitalBuyers;
+    }
+
     const programsData = [
       { id: 1, title: "برنامج الحفظ والمراجعة والسرد", desc: "برنامج متكامل لبناء وتثبيت الحفظ بخطط علمية وسرد دقيق.", value: "يمنحك الضبط التام للقرآن الكريم، ومراجعة متقنة تناسب وقتك ومستوى حفظك." },
       { id: 2, title: "برنامج التفسير الشامل", desc: "دراسة معاني كتاب الله ودلالات الآيات وتطبيقاتها المعرفية.", value: "الفهم العميق لكلام الله والاستبصار بالهدايات القرآنية لترميم الروح والفكر." },
@@ -746,6 +829,33 @@
       alert('شكراً لكِ! تم نشر تقييمكِ بنجاح.');
     }
 
+    // إدارة العرض بالصفحات والتنقل
+    let currentPdfPage = parseInt(localStorage.getItem('mkn_pdf_page_num')) || 1;
+    const totalPdfPages = 377;
+
+    function updateIframeSrc() {
+      const iframe = document.getElementById('protectedPdfIframe');
+      iframe.src = `book.pdf#page=${currentPdfPage}&toolbar=0&navpanes=0&scrollbar=1`;
+      document.getElementById('currentPdfPageNum').textContent = currentPdfPage;
+      localStorage.setItem('mkn_pdf_page_num', currentPdfPage);
+    }
+
+    function changePdfPage(delta) {
+      if (currentPdfPage + delta >= 1 && currentPdfPage + delta <= totalPdfPages) {
+        currentPdfPage += delta;
+        updateIframeSrc();
+      }
+    }
+
+    function openProtectedReader() {
+      document.getElementById('protectedReaderModal').style.display = 'flex';
+      updateIframeSrc();
+    }
+
+    function closeProtectedReader() {
+      document.getElementById('protectedReaderModal').style.display = 'none';
+    }
+
     function updateBookPriceCalculations() {
       const type = document.getElementById('bookTypeSelect').value;
       const qty = parseInt(document.getElementById('bookQty').value) || 1;
@@ -753,16 +863,22 @@
       const rajhiBox = document.getElementById('rajhiBookDetails');
       const qtyGroup = document.getElementById('qtyGroup');
       const addressGroup = document.getElementById('addressGroup');
+      const submitBtn = document.getElementById('bookSubmitBtn');
+      const readDirectBtn = document.getElementById('readBookDirectBtn');
 
       let price = 0;
       if (type === 'printed') {
         qtyGroup.style.display = 'block';
         if (addressGroup) addressGroup.style.display = 'block';
         price = qty * 40;
+        submitBtn.textContent = "تأكيد طلب الكتاب/الكتب بالنسخة الورقية المطبوعة والتواصل عبر الواتساب";
+        readDirectBtn.style.display = "none"; // حظر زر القراءة نهائياً للنسخة المطبوعة
       } else {
         qtyGroup.style.display = 'none';
         if (addressGroup) addressGroup.style.display = 'none';
         price = 20;
+        submitBtn.textContent = "تأكيد طلب شراء النسخة الرقمية للكتاب";
+        readDirectBtn.style.display = "none"; // إخفاء الزر افتراضياً حتى يشتري
       }
 
       if (payment === 'rajhi') {
@@ -900,27 +1016,40 @@
 
     function closeModal() { document.getElementById('programModal').style.display = 'none'; }
 
-    // توليد رقم عضوية فريد تلقائياً لكل حجز
     function generateMemberID() {
       return "MKN-" + Math.floor(1000 + Math.random() * 9000);
     }
 
     document.getElementById('bookOrderForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const type = document.getElementById('bookTypeSelect').value === 'printed' ? 'نسخة مطبوعة ورقية' : 'نسخة رقمية محمية PDF';
+      const isPrinted = document.getElementById('bookTypeSelect').value === 'printed';
       const name = document.getElementById('b_name').value;
       const phone = document.getElementById('b_phone').value;
       const country = document.getElementById('b_country').value;
       const city = document.getElementById('b_city').value;
       const payment = document.getElementById('bookPaymentMethod').value === 'rajhi' ? 'بنك الراجحي' : 'بايونير / CIB';
-      const totalDisplay = document.getElementById('bookPriceDisplay').textContent;
-      const memberID = generateMemberID();
+      const qty = parseInt(document.getElementById('bookQty').value) || 1;
 
-      let msg = `السلام عليكم ورحمة الله، طلب شراء كتاب (إحياء العقل السليم):\n`;
-      msg += `• رقم العضوية المولد للطالبة: ${memberID}\n`;
-      msg += `• النوع: ${type}\n• الاسم: ${name}\n• الهاتف: ${phone}\n• العنوان: ${country} - ${city}\n• الدفع: ${payment}\n• ${totalDisplay}`;
+      if (isPrinted) {
+        printedBuyers += qty;
+        localStorage.setItem('mkn_printed_buyers', printedBuyers);
+        renderCounters();
 
-      window.open(`https://wa.me/${TARGET_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+        const memberID = generateMemberID();
+        let msg = `السلام عليكم ورحمة الله، طلب شراء كتاب (إحياء العقل السليم):\n`;
+        msg += `• رقم العضوية المولد للطالبة: ${memberID}\n`;
+        msg += `• النوع: نسخة مطبوعة ورقية (${qty} نسخة)\n• الاسم: ${name}\n• الهاتف: ${phone}\n• العنوان: ${country} - ${city}\n• الدفع: ${payment}\n• ${document.getElementById('bookPriceDisplay').textContent}`;
+        
+        window.open(`https://wa.me/${TARGET_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+      } else {
+        // الشراء الرقمي -> سحب 20 دولار، زيادة العداد، وإظهار زر اقرأ الكتاب لأول مرة
+        digitalBuyers += 1;
+        localStorage.setItem('mkn_digital_buyers', digitalBuyers);
+        renderCounters();
+
+        alert('✔ تم تأكيد عملية الدفع ($20) بنجاح عبر البوابة الآمنة.\nأهلاً بكِ! تم إتاحة القارئ المشفر لكِ الآن.');
+        document.getElementById('readBookDirectBtn').style.display = 'block';
+      }
     });
 
     document.getElementById('programBookingForm').addEventListener('submit', function(e) {
@@ -948,6 +1077,15 @@
       window.open(`https://wa.me/${TARGET_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
       closeModal();
     });
+
+    // حظر اختصارات الطباعة والتحديد
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 's' || e.key === 'u')) {
+        e.preventDefault();
+      }
+    });
+
+    renderCounters();
   </script>
 </body>
 </html>
