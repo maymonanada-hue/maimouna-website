@@ -148,6 +148,18 @@
     .record-controls { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
     .btn-record { background: #EF4444; color: white; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; }
 
+    /* حماية القراءة الرقمية من النسخ */
+    .protected-reader {
+      user-select: none;
+      -webkit-user-select: none;
+      background: #FFF;
+      padding: 20px;
+      border: 2px solid var(--navy-dark);
+      border-radius: 8px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 25, 47, 0.85); z-index: 2000; justify-content: center; align-items: center; padding: 15px; overflow-y: auto; }
     .modal-content { background: var(--white); width: 100%; max-width: 800px; border-radius: 12px; border: 2px solid var(--gold-main); padding: 25px; max-height: 90vh; overflow-y: auto; position: relative; }
     .close-modal { position: absolute; top: 12px; left: 12px; font-size: 22px; font-weight: bold; color: var(--navy-dark); cursor: pointer; background: #E2E8F0; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 28px; }
@@ -165,7 +177,7 @@
     footer { background-color: var(--navy-dark); color: var(--white); text-align: center; padding: 20px; border-top: 3px solid var(--gold-main); font-size: 13px; margin-top: auto; }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
   <!-- Navigation Bar -->
   <header>
@@ -267,7 +279,7 @@
           <p style="color: var(--text-muted); margin-bottom: 15px;">دراسة علمية استقرائية مبتكرة في الاستشفاء القرآني المعرفي لتقوية الفهم والذاكرة والذكاء وعلاج حالات النسيان وأمراض الدماغ.</p>
           <div class="value-box">
             <h4>تنبيه خاص بالنسخة الرقمية (PDF):</h4>
-            <p style="font-size: 13px; color: #334155;">النسخة الرقمية مشفرة ومحمية بحقوق الطبع، وهي للاستخدام الشخصي فقط ولا يجوز إعادة نسخها أو إرسالها أو طباعتها.</p>
+            <p style="font-size: 13px; color: #334155;">النسخة الرقمية مشفرة ومحمية بحقوق الطبع، وتفتح للقراءة فقط عبر الموقع داخل حساب الطالبة بعد الشراء، ولا يجوز إعادة نسخها أو إرسالها أو طباعتها.</p>
           </div>
         </div>
 
@@ -278,7 +290,7 @@
               <label for="bookTypeSelect">نوع النسخة المطلوبة:</label>
               <select id="bookTypeSelect" onchange="updateBookPriceCalculations()" required>
                 <option value="printed">نسخة مطبوعة ورقية ($40 / للنسخة)</option>
-                <option value="digital">نسخة رقمية محمية PDF ($20)</option>
+                <option value="digital">نسخة رقمية محمية للقراءة فقط ($20)</option>
               </select>
             </div>
             
@@ -329,7 +341,7 @@
             </div>
 
             <div class="total-price-banner" id="bookPriceDisplay">المبلغ الإجمالي المطلـوب: $40</div>
-            <button type="submit" class="btn-gold">إتمام الطلب والتواصل عبر الواتساب</button>
+            <button type="submit" class="btn-gold">تأكيد طلب الكتاب والتواصل عبر الواتساب</button>
           </form>
         </div>
       </div>
@@ -352,6 +364,7 @@
           <div>
             <h2 style="color: var(--gold-main);">أهلاً بكِ أختي الكريمة: <span id="dash_student_name">أمة الله فاطمة</span></h2>
             <p style="font-size: 14px; color: #CBD5E1;">البرنامج المكتتب فيه: <strong>برنامج تصحيح التلاوة والإجازة بالسند</strong></p>
+            <p style="font-size: 13px; color: var(--gold-main);">رقم العضوية الخاص بكِ: <strong id="dash_member_id">MKN-8942</strong></p>
           </div>
           <button class="btn-gold" style="max-width: 150px; font-size: 13px; padding: 6px;" onclick="logoutStudent()">تسجيل الخروج</button>
         </div>
@@ -392,6 +405,16 @@
             </tr>
           </tbody>
         </table>
+
+        <!-- مكتبة القراءة للنسخة الرقمية المحمية داخل الحساب -->
+        <h3 style="color: var(--navy-dark); margin: 25px 0 15px; border-bottom: 2px solid var(--gold-main); padding-bottom: 5px;">📖 النسخة الرقمية المتاحة للقراءة فقط</h3>
+        <div class="protected-reader">
+          <h4 style="color: var(--navy-dark); text-align: center; margin-bottom: 10px;">كتاب إحياء العقل السليم بكلام الخلاق العليم</h4>
+          <p style="font-size: 13.5px; color: #334155; line-height: 2;">
+            [هنا يظهر نص ومحتوى كتاب إحياء العقل السليم المحمي داخل حساب الطالبة، مع حظر أزرار الطباعة والتحديد لحفظ حقوق الطبع والنشر].
+          </p>
+        </div>
+
       </div>
     </section>
   </div>
@@ -410,7 +433,7 @@
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <h4 style="color: var(--navy-dark);">الطالبة: مريم العتيبي (السعودية)</h4>
-          <p style="font-size: 13.5px; color: var(--text-dark); margin-top: 8px;">"تجربة الإجازة مع الشيخة ميمونة من أعظم النعم في حياتي. صبرها ودقتها في ضبط مخارج الحروف لا أجد له مثيلاً."</p>
+          <p style="font-size: 13.5px; color: var(--text-dark); margin-top: 8px;">"تجربة برنامج تحسين التلاوة مع الشيخة ميمونة من أعظم النعم في حياتي. صبرها ودقتها في ضبط مخارج الحروف لا أجد له مثيلاً."</p>
         </div>
 
         <div class="review-card">
@@ -430,11 +453,11 @@
       
       <form id="loginForm" onsubmit="handleStudentLogin(event)">
         <div class="form-group">
-          <label for="student_login_phone">رقم الهاتف / الواتساب المسجل بالحجز:</label>
+          <label for="student_login_phone">اسم المستخدم (رقم الهاتف / الواتساب المسجل بالحجز):</label>
           <input type="tel" id="student_login_phone" required placeholder="00966XXXXXXX">
         </div>
         <div class="form-group">
-          <label for="student_login_pass">كلمة السر / رقم العضوية:</label>
+          <label for="student_login_pass">كلمة السر (رقم العضوية):</label>
           <input type="password" id="student_login_pass" required placeholder="••••••••">
         </div>
         <button type="submit" class="btn-gold" style="margin-top: 15px;">دخول اللوحة المباشرة</button>
@@ -450,11 +473,11 @@
       <form id="reviewForm" onsubmit="handleSaveReview(event)">
         <div class="form-group">
           <label for="rev_name">اسم الطالب/ة الكريم:</label>
-          <input type="text" id="rev_name" required placeholder="أدخل اسمك الكريمة">
+          <input type="text" id="rev_name" required placeholder="أدخل اسمك الكريم">
         </div>
         <div class="form-group">
           <label for="rev_program">البرنامج / الخدمة التي جربتها:</label>
-          <input type="text" id="rev_program" required placeholder="مثال: إجازة القراءات / كتاب إحياء العقل السليم">
+          <input type="text" id="rev_program" required placeholder="مثال: برنامج تحسين التلاوة / كتاب إحياء العقل السليم">
         </div>
         <div class="form-group">
           <label for="rev_stars">التقييم:</label>
@@ -877,6 +900,11 @@
 
     function closeModal() { document.getElementById('programModal').style.display = 'none'; }
 
+    // توليد رقم عضوية فريد تلقائياً لكل حجز
+    function generateMemberID() {
+      return "MKN-" + Math.floor(1000 + Math.random() * 9000);
+    }
+
     document.getElementById('bookOrderForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const type = document.getElementById('bookTypeSelect').value === 'printed' ? 'نسخة مطبوعة ورقية' : 'نسخة رقمية محمية PDF';
@@ -886,8 +914,10 @@
       const city = document.getElementById('b_city').value;
       const payment = document.getElementById('bookPaymentMethod').value === 'rajhi' ? 'بنك الراجحي' : 'بايونير / CIB';
       const totalDisplay = document.getElementById('bookPriceDisplay').textContent;
+      const memberID = generateMemberID();
 
-      let msg = `السلام عليكم ورحمة الله، أرغب في طلب كتاب (إحياء العقل السليم):\n`;
+      let msg = `السلام عليكم ورحمة الله، طلب شراء كتاب (إحياء العقل السليم):\n`;
+      msg += `• رقم العضوية المولد للطالبة: ${memberID}\n`;
       msg += `• النوع: ${type}\n• الاسم: ${name}\n• الهاتف: ${phone}\n• العنوان: ${country} - ${city}\n• الدفع: ${payment}\n• ${totalDisplay}`;
 
       window.open(`https://wa.me/${TARGET_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -905,12 +935,14 @@
       const country = document.getElementById('p_country').value;
       const timeSlot = document.getElementById('timeSlotSelect').value;
       const payment = document.getElementById('programPaymentMethod').value === 'rajhi' ? 'بنك الراجحي' : 'بايونير / CIB';
+      const memberID = generateMemberID();
 
       let checkedDays = [];
       document.querySelectorAll('input[name="p_days"]:checked').forEach(cb => checkedDays.push(cb.value));
       const daysStr = checkedDays.length > 0 ? checkedDays.join('، ') : 'غير محدد';
 
-      let msg = `السلام عليكم ورحمة الله، أرغب في حجز برنامج تعليمي لدى الشيخة د. ميمونة ندا:\n`;
+      let msg = `السلام عليكم ورحمة الله، حجز برنامج تعليمي جديد لدى الشيخة د. ميمونة ندا:\n`;
+      msg += `• رقم العضوية المولد للطالبة: ${memberID}\n`;
       msg += `• الخطة: ${selectedPlanNameGlobal}\n• الاسم: ${name} (${age} سنة)\n• الهاتف: ${phone}\n• التخصص: ${specialty}\n• الحفظ: ${memorized}\n• مستوى الحافظ: ${hafizLvl}\n• مستوى التجويد: ${tajweedLvl}\n• الدولة والمدينة: ${country}\n• الأيام المفضلة: ${daysStr}\n• الفترة المفضلة: ${timeSlot}\n• طريقة الدفع: ${payment}\n• ${document.getElementById('programPriceDisplay').textContent}`;
 
       window.open(`https://wa.me/${TARGET_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
