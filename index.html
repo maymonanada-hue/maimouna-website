@@ -482,7 +482,7 @@
     </section>
   </div>
 
-  <!-- PAGE 3: MAKEEN SERVICES (محدث بتعديل برامج الأطفال) -->
+  <!-- PAGE 3: MAKEEN SERVICES -->
   <div id="services-page" class="page-section">
     <section class="container">
       <h2 class="section-title">برامج وخدمات شركة مكين التعليمية</h2>
@@ -781,14 +781,14 @@
 
   <!-- MODALS -->
 
-  <!-- نافذة إرشادية أنيقة ومصممة بدلاً من alert الافتراضي -->
+  <!-- نافذة إرشادية أنيقة للدعم -->
   <div id="supportNoticeModal" class="modal-overlay">
     <div class="modal-content" style="max-width: 500px; text-align: center; border: 2px solid var(--gold-main);">
       <span class="close-modal" onclick="closeSupportNoticeModal()">&times;</span>
       <div style="font-size: 40px; margin-bottom: 10px;">🤝</div>
       <h3 style="color: var(--navy-dark); font-weight: 800; margin-bottom: 12px;">أهلاً بك كافلاً وطالباً للأجر!</h3>
       <p style="color: var(--text-dark); font-size: 14.5px; line-height: 1.8; margin-bottom: 20px;">
-        يرجى اختيار البرنامج التعليمي المطلوب تكفله ودعمه من القائمة، ثم تحديد خيار <strong style="color: var(--navy-light);">(حجز دعم طالب علم)</strong> بداخل نموذج الحجز.
+        يرجى اختيار البرنامج التعليمي المطلوب <strong style="color: var(--navy-light);">كفالته ودعمه</strong> من القائمة، ثم تحديد خيار <strong style="color: var(--navy-light);">(حجز دعم طالب علم)</strong> بداخل نموذج الحجز.
       </p>
       <button class="btn-gold" onclick="proceedToSupportPrograms()">الانتقال لبرامج مكين واختيار برنامج الدعم ➔</button>
     </div>
@@ -902,13 +902,6 @@
     </div>
   </div>
 
-  <div id="imageZoomModal" class="modal-overlay">
-    <div style="position: relative; max-width: 90%; max-height: 90vh;">
-      <span class="close-modal" onclick="closeImageZoom()" style="top: -15px; left: -15px; z-index: 2001;">&times;</span>
-      <img id="zoomedImg" src="" alt="غلاف مكبر" style="max-width: 100%; max-height: 85vh; border-radius: 12px; border: 3px solid var(--gold-main);">
-    </div>
-  </div>
-
   <!-- PROGRAM DETAILS & BOOKING MODAL -->
   <div id="programModal" class="modal-overlay">
     <div class="modal-content">
@@ -958,40 +951,45 @@
           <div class="form-group"><label for="p_specialty">التخصص العلمي / المهنة:</label><input type="text" id="p_specialty" required placeholder="مثال: شريعة / هندسة"></div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="p_quran_memorized">كم تحفظ/ين من القرآن الكريم؟</label>
-            <select id="p_quran_memorized" required>
-              <option value="لا أحفظ سوى قصار الصور">لا أحفظ سوى قصار الصور</option>
-              <option value="من 1 إلى 5 أجزاء">من 1 إلى 5 أجزاء</option>
-              <option value="من 6 إلى 10 أجزاء">من 6 إلى 10 أجزاء</option>
-              <option value="من 11 إلى 20 جزءاً">من 11 إلى 20 جزءاً</option>
-              <option value="من 21 إلى 29 جزءاً">من 21 إلى 29 جزءاً</option>
-              <option value="حافظ/ة للقرآن الكريم كاملاً (30 جزءاً)">حافظ/ة للقرآن الكريم كاملاً (30 جزءاً)</option>
-            </select>
+        <!-- قسم بيانات القرآن الكريم (يظهر فقط في البرامج 1 إلى 4) -->
+        <div id="quranDataFieldsArea">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="p_quran_memorized">كم تحفظ/ين من القرآن الكريم؟</label>
+              <select id="p_quran_memorized">
+                <option value="لا أحفظ سوى قصار الصور">لا أحفظ سوى قصار الصور</option>
+                <option value="من 1 إلى 5 أجزاء">من 1 إلى 5 أجزاء</option>
+                <option value="من 6 إلى 10 أجزاء">من 6 إلى 10 أجزاء</option>
+                <option value="من 11 إلى 20 جزءاً">من 11 إلى 20 جزءاً</option>
+                <option value="من 21 إلى 29 جزءاً">من 21 إلى 29 جزءاً</option>
+                <option value="حافظ/ة للقرآن الكريم كاملاً (30 جزءاً)">حافظ/ة للقرآن الكريم كاملاً (30 جزءاً)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="p_hafiz_level">مستوى الحافظ:</label>
+              <select id="p_hafiz_level">
+                <option value="ضعيف">ضعيف</option>
+                <option value="جيد">جيد</option>
+                <option value="حافظ">حافظ</option>
+                <option value="ثابت">ثابت</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="p_hafiz_level">مستوى الحافظ:</label>
-            <select id="p_hafiz_level" required>
-              <option value="ضعيف">ضعيف</option>
-              <option value="جيد">جيد</option>
-              <option value="حافظ">حافظ</option>
-              <option value="ثابت">ثابت</option>
-            </select>
-          </div>
-        </div>
 
-        <div class="form-row">
           <div class="form-group">
             <label for="p_tajweed_level">مستوى التجويد:</label>
-            <select id="p_tajweed_level" required>
+            <select id="p_tajweed_level">
               <option value="ضعيف">ضعيف</option>
               <option value="جيد">جيد</option>
               <option value="مُتقِن">مُتقِن</option>
               <option value="ماهر بالقرآن">ماهر بالقرآن</option>
             </select>
           </div>
-          <div class="form-group"><label for="p_country">الجنسية والدولة والمدينة:</label><input type="text" id="p_country" required placeholder="مثال: سعودي - الرياض"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="p_country">الجنسية والدولة والمدينة:</label>
+          <input type="text" id="p_country" required placeholder="مثال: سعودي - الرياض">
         </div>
 
         <div class="form-group" id="daysSelectionGroup" style="display:none;">
@@ -1065,7 +1063,6 @@
       }
     }
 
-    // فتح النافذة المنبثقة الأنيقة للدعم في المنتصف
     function openSupportNoticeModal() {
       document.getElementById('supportNoticeModal').style.display = 'flex';
     }
@@ -1369,12 +1366,22 @@
 
     let selectedProgramBasePriceSAR = 0;
     let selectedPlanNameGlobal = "";
+    let selectedProgramIDGlobal = 0;
 
     function openProgramModal(id) {
+      selectedProgramIDGlobal = id;
       const currentProgram = programsData.find(p => p.id === id);
       document.getElementById('modalTitle').textContent = currentProgram.title;
       document.getElementById('modalDesc').textContent = currentProgram.desc;
       document.getElementById('modalValue').textContent = currentProgram.value;
+
+      // التكتم أو إظهار حقول بيانات القرآن بناءً على رقم البرنامج (1 إلى 4 فقط)
+      const quranFields = document.getElementById('quranDataFieldsArea');
+      if (id <= 4) {
+        quranFields.style.display = 'block';
+      } else {
+        quranFields.style.display = 'none';
+      }
 
       const container = document.getElementById('bookingOptionsContainer');
       document.getElementById('programBookingForm').style.display = 'none';
@@ -1535,12 +1542,18 @@
       const pAge = document.getElementById('p_age').value;
       const pPhone = document.getElementById('p_phone').value;
       const pSpecialty = document.getElementById('p_specialty').value;
-      const pMemorized = document.getElementById('p_quran_memorized').value;
-      const pHafizLvl = document.getElementById('p_hafiz_level').value;
-      const pTajweedLvl = document.getElementById('p_tajweed_level').value;
       const pCountry = document.getElementById('p_country').value;
       const timeSlot = document.getElementById('timeSlotSelect').value;
       const payment = document.getElementById('programPaymentMethod').value === 'rajhi' ? 'بنك الراجحي' : 'بايونير / CIB';
+
+      // جمع بيانات القرآن فقط إذا كان البرنامج من البرامج الأربعة الأولى
+      let quranTextInfo = "";
+      if (selectedProgramIDGlobal <= 4) {
+        const pMemorized = document.getElementById('p_quran_memorized').value;
+        const pHafizLvl = document.getElementById('p_hafiz_level').value;
+        const pTajweedLvl = document.getElementById('p_tajweed_level').value;
+        quranTextInfo = `• مقدار الحفظ: ${pMemorized}\n• مستوى الحافظ: ${pHafizLvl} | مستوى التجويد: ${pTajweedLvl}\n`;
+      }
 
       const studentMemberID = generateMemberID("STD");
 
@@ -1563,8 +1576,7 @@
         adminMsg += `• اسم الطالب: ${pName} (${pAge} سنة)\n`;
         adminMsg += `• جوال الطالب: ${pPhone}\n`;
         adminMsg += `• تخصص/مهنة الطالب: ${pSpecialty}\n`;
-        adminMsg += `• مقدار الحفظ: ${pMemorized}\n`;
-        adminMsg += `• مستوى الحافظ: ${pHafizLvl} | مستوى التجويد: ${pTajweedLvl}\n`;
+        if (quranTextInfo !== "") adminMsg += quranTextInfo;
         adminMsg += `• جنسية ودولة الطالب: ${pCountry}\n`;
         adminMsg += `----------------------------\n`;
         adminMsg += `• الخطة المختار كفالتها: ${selectedPlanNameGlobal}\n`;
@@ -1594,7 +1606,9 @@
       } else {
         let msg = `السلام عليكم ورحمة الله، حجز برنامج تعليمي جديد لدى الشيخة د. ميمونة ندا:\n`;
         msg += `• رقم العضوية المولد للطالبة: ${studentMemberID}\n`;
-        msg += `• الخطة: ${selectedPlanNameGlobal}\n• الاسم: ${pName} (${pAge} سنة)\n• الهاتف: ${pPhone}\n• التخصص: ${pSpecialty}\n• الحفظ: ${pMemorized}\n• مستوى الحافظ: ${pHafizLvl}\n• مستوى التجويد: ${pTajweedLvl}\n• الجنسية والدولة: ${pCountry}\n• الفترة المفضلة: ${timeSlot}\n• طريقة الدفع: ${payment}\n• ${document.getElementById('programPriceDisplay').textContent}`;
+        msg += `• الخطة: ${selectedPlanNameGlobal}\n• الاسم: ${pName} (${pAge} سنة)\n• الهاتف: ${pPhone}\n• التخصص: ${pSpecialty}\n`;
+        if (quranTextInfo !== "") msg += quranTextInfo;
+        msg += `• الجنسية والدولة: ${pCountry}\n• الفترة المفضلة: ${timeSlot}\n• طريقة الدفع: ${payment}\n• ${document.getElementById('programPriceDisplay').textContent}`;
         
         window.open(`https://wa.me/${TARGET_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
       }
